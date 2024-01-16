@@ -1,14 +1,14 @@
 class User {
-  String firstName;
-  String lastName;
+  String name;
   String gender;
+  String age;
   String dateOfBirth;
-  String address;
+  String occupation;
 
   User(
-      {required this.firstName,
-      required this.lastName,
+      {required this.name,
       required this.gender,
+      required this.age,
       required this.dateOfBirth,
-      required this.address});
+      required this.occupation});
 }

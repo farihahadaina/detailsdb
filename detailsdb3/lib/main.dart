@@ -1,6 +1,8 @@
+import 'package:detailsdb/updatescreen.dart';
 import 'package:flutter/material.dart';
 import 'routes.dart';
 import 'first_screen.dart';
+import 'inputscreen.dart';
 import 'second_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -28,8 +30,9 @@ class MyApp extends StatelessWidget {
         // home: const MyHomePage(title: 'Flutter Form Widget'),
         initialRoute: Routes.firstScreen,
         routes: {
-          Routes.firstScreen: (context) => const FirstScreen(),
+          Routes.firstScreen: (context) => const MyInputScreen(),
           Routes.secondScreen: (context) => const SecondScreen(),
+          Routes.updateScreen: (context) => const UpdateScreen(),
         });
         
   }
