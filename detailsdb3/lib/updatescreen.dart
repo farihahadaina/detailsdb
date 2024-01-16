@@ -119,41 +119,79 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
               border: OutlineInputBorder(),
               labelText: "Enter Occupation",
           ),),
-        const SizedBox(height: 30,),
-        Center(
-         child: ElevatedButton(
-          onPressed: (){
-            Map<String, String> users = {
-              'name' : nameController.text,
-              'gender' : genderController.text,
-              'age' : ageController.text,
-              'dob' : dobController.text,
-              'occupation' : occupationController.text,
-            };
+          const SizedBox(height: 30,),
+          Center(
+          child: ElevatedButton(
+            onPressed: (){
+              Map<String, String> users = {
+                'name' : nameController.text,
+                'gender' : genderController.text,
+                'age' : ageController.text,
+                'dob' : dobController.text,
+                'occupation' : occupationController.text,
+              };
 
-            dbRef.child(widget.userKey).update(users).then((value) => {
-            Navigator.pushNamed(context, Routes.secondScreen,
-                            arguments: User(
-                                userKey: widget.userKey,
-                                name: nameController.text,
-                                gender: genderController.text,
-                                age: ageController.text,
-                                dateOfBirth: dobController.text,
-                                occupation: occupationController.text)) 
-            });
-            // dbRef.push().set(users);
-        }, 
-          child: const Text("Update", style: TextStyle(
-          color: Colors.black,
-          fontSize: 20,
-          fontWeight: FontWeight.bold
-),
+              dbRef.child(widget.userKey).update(users).then((value) => {
+              Navigator.pushNamed(context, Routes.secondScreen,
+                              arguments: User(
+                                  userKey: widget.userKey,
+                                  name: nameController.text,
+                                  gender: genderController.text,
+                                  age: ageController.text,
+                                  dateOfBirth: dobController.text,
+                                  occupation: occupationController.text)) 
+              });
+              // dbRef.push().set(users);
+            }, 
+            child: const Text("Update", style: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.bold
+            ),
+            ),
+          )
+          ),
+          Expanded(
+            child: Container(),
+          ),          
+            Container(
+              margin: const EdgeInsets.all(20),
+              width: double.infinity,
+              height: 55,
+              child: ElevatedButton(
+                onPressed: () {
+                  // delete dialog box
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Delete Confirmation'),
+                        content: const Text('Are you sure you want to delete this user?'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'Cancel'),
+                            child: const Text('Cancel'),                          
+                          ),
+                          TextButton(
+                            onPressed: () {                            
+                              dbRef.child(widget.userKey).remove();  // delete from firebase database                                                                             
+                              Navigator.pushNamed(context, Routes.homeScreen); // redirect to home screen
+                            },
+                            child: const Text('OK'),
+                          ),
+                        ],                      
+                      );
+                    },
+                  );
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.red),
+                ),
+                child: const Text('Delete'),           
+              ),
+            )            
+          ]),
         ),
-        )
-        )
-]),
-      ),
-
     );
   }
 }
