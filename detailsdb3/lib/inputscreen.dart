@@ -1,10 +1,8 @@
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'main.dart';
 import 'user.dart';
 import 'routes.dart';
-import 'updatescreen.dart';
 
 class MyInputScreen extends StatefulWidget {
   const MyInputScreen({Key? key}) : super(key: key);
@@ -120,16 +118,23 @@ class _MyInputScreenState extends State<MyInputScreen> {
               'dob' : dobController.text,
               'occupation' : occupationController.text,
             };
-            Navigator.pushNamed(context, Routes.secondScreen,
-                            arguments: User(
-                                name: nameController.text,
-                                gender: genderController.text,
-                                age: ageController.text,
-                                dateOfBirth: dobController.text,
-                                occupation: occupationController.text));
+            
+            DatabaseReference newRef = dbRef.push();
+            newRef.set(users);
 
-            dbRef.push().set(users);
-        }, 
+            Navigator.pushNamed(
+              context,
+              Routes.secondScreen,
+              arguments: User(
+                userKey: newRef.key!,
+                name: nameController.text,
+                gender: genderController.text,
+                age: ageController.text,
+                dateOfBirth: dobController.text,
+                occupation: occupationController.text,
+              ),
+            );
+          }, 
           child: const Text("Add", style: TextStyle(
           color: Colors.black,
           fontSize: 20,

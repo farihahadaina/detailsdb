@@ -1,7 +1,7 @@
 import 'package:detailsdb/updatescreen.dart';
 import 'package:flutter/material.dart';
 import 'routes.dart';
-import 'first_screen.dart';
+// import 'first_screen.dart';
 import 'inputscreen.dart';
 import 'second_screen.dart';
 import 'package:firebase_core/firebase_core.dart';

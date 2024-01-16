@@ -1,7 +1,5 @@
-//import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'main.dart';
 import 'user.dart';
 import 'routes.dart';
 
@@ -136,6 +134,7 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
             dbRef.child(widget.userKey).update(users).then((value) => {
             Navigator.pushNamed(context, Routes.secondScreen,
                             arguments: User(
+                                userKey: widget.userKey,
                                 name: nameController.text,
                                 gender: genderController.text,
                                 age: ageController.text,
