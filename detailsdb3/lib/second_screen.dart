@@ -1,3 +1,4 @@
+import 'package:detailsdb/updatescreen.dart';
 import 'package:flutter/material.dart';
 import 'user.dart';
 
@@ -22,12 +23,7 @@ class _SecondScreenState extends State<SecondScreen> {
             Container(
               margin: const EdgeInsets.all(15),
               alignment: Alignment.centerLeft,
-              child: Text('First Name  : ${user.firstName}'),
-            ),
-            Container(
-              alignment: Alignment.centerLeft,
-              margin: const EdgeInsets.all(15),
-              child: Text('Last Name  : ${user.lastName}'),
+              child: Text('Name  : ${user.name}'),
             ),
             Container(
               alignment: Alignment.centerLeft,
@@ -37,12 +33,17 @@ class _SecondScreenState extends State<SecondScreen> {
             Container(
               alignment: Alignment.centerLeft,
               margin: const EdgeInsets.all(15),
+              child: Text('Age  : ${user.age}'),
+            ),
+            Container(
+              alignment: Alignment.centerLeft,
+              margin: const EdgeInsets.all(15),
               child: Text('Date of Birth  : ${user.dateOfBirth}'),
             ),
             Container(
               alignment: Alignment.centerLeft,
               margin: const EdgeInsets.all(15),
-              child: Text('Current Address  : ${user.address}'),
+              child: Text('Occupation  : ${user.occupation}'),
             ),
             Container(
                 margin: const EdgeInsets.all(20),
@@ -50,7 +51,8 @@ class _SecondScreenState extends State<SecondScreen> {
                 height: 55,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => const UpdateScreen(userKey: user.userKey)));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => UpdateScreen(userKey: user.userKey)));
                   },
                   child: const Text('Update'),
                 )),
