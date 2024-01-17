@@ -34,7 +34,7 @@ class _MyInputScreenState extends State<MyInputScreen> {
       appBar: AppBar(title: const Row (
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-        Text("Enter Information Details",
+        Text("Enter Your Details",
         style: TextStyle(
           color: Colors.black,
           fontSize: 30,
@@ -62,8 +62,12 @@ class _MyInputScreenState extends State<MyInputScreen> {
               labelText: "Enter Name",
             ),
             // ignore: body_might_complete_normally_nullable
-            validator: (name)=> name!.isEmpty ? "Enter Name" : null,
-          ),
+            validator: (value) {
+             if (value!.isEmpty) {
+             return 'Please enter your name';
+            }
+            return null; // Valid input
+            },),
           const SizedBox(height: 20,),
           TextFormField(
           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -77,8 +81,12 @@ class _MyInputScreenState extends State<MyInputScreen> {
               border: OutlineInputBorder(),
               labelText: "Gender (M/F)",
             ),
-            validator: (gender) => gender!.isEmpty ? "Enter Gender" : null,
-          ),
+            validator: (value) {
+             if (value!.isEmpty) {
+             return 'Please enter your gender';
+            }
+            return null; // Valid input
+            },          ),
           const SizedBox(height: 20,),
           TextFormField(
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -92,8 +100,12 @@ class _MyInputScreenState extends State<MyInputScreen> {
               border: OutlineInputBorder(),
               labelText: "Enter Age",
             ),
-          validator: (age)=> age!.isEmpty ? "Enter Age" : null,
-          ),
+            validator: (value) {
+             if (value!.isEmpty) {
+             return 'Please enter your age';
+            }
+            return null; // Valid input
+            },          ),
           const SizedBox(height: 20, width: 20,),
           TextFormField(
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -107,8 +119,12 @@ class _MyInputScreenState extends State<MyInputScreen> {
               border: OutlineInputBorder(),
               labelText: "Enter DOB",
             ),
-          validator: (dob)=> dob!.isEmpty ? "Enter DOB" : null,
-          ),
+            validator: (value) {
+             if (value!.isEmpty) {
+             return 'Please enter your Date of Birth (DOB)';
+            }
+            return null; // Valid input
+            },          ),
           const SizedBox(height: 20,),
           TextFormField(
           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -122,13 +138,17 @@ class _MyInputScreenState extends State<MyInputScreen> {
               border: OutlineInputBorder(),
               labelText: "Enter Occupation",
           ),
-          validator: (occupation)=> occupation!.isEmpty ? "Enter Your Occupation" : null,
-          ),
+            validator: (value) {
+             if (value!.isEmpty) {
+             return 'Please enter your occupation';
+            }
+            return null; // Valid input
+            },          ),
         const SizedBox(height: 30,),
         Center(
          child: ElevatedButton(
           onPressed: (){
-          _formKey.currentState!.validate();
+          if(_formKey.currentState!.validate()){
             Map<String, String> users = {
               'name' : nameController.text,
               'gender' : genderController.text,
@@ -152,7 +172,7 @@ class _MyInputScreenState extends State<MyInputScreen> {
                 occupation: occupationController.text,
               ),
             );
-          },
+          }},
           child: const Text("Add", style: TextStyle(
           color: Colors.black,
           fontSize: 20,
