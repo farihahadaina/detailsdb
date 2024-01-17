@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'user.dart';
 import 'routes.dart';
 
@@ -131,17 +132,38 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
               'occupation' : occupationController.text,
             };
 
-            dbRef.child(widget.userKey).update(users).then((value) => {
+            dbRef.child(widget.userKey).update(users).then((value) {
             Navigator.pushNamed(context, Routes.secondScreen,
-                            arguments: User(
-                                userKey: widget.userKey,
-                                name: nameController.text,
-                                gender: genderController.text,
-                                age: ageController.text,
-                                dateOfBirth: dobController.text,
-                                occupation: occupationController.text)) 
-            });
-            // dbRef.push().set(users);
+              arguments: User(
+                userKey: widget.userKey,
+                name: nameController.text,
+                gender: genderController.text,
+                age: ageController.text,
+                dateOfBirth: dobController.text,
+                occupation: occupationController.text,
+              ),
+            );
+
+            Fluttertoast.showToast(
+              msg: "User Details Updated",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.green,
+              textColor: Colors.white,
+              fontSize: 16.0,
+            );
+          }).onError((error, stackTrace) {
+            Fluttertoast.showToast(
+              msg: "Error: ${error.toString()}",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0,
+            );
+          });
         }, 
           child: const Text("Update", style: TextStyle(
           color: Colors.black,
