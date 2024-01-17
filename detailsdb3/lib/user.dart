@@ -1,10 +1,10 @@
 class User {
-  String name;
-  String gender;
-  String age;
-  String dateOfBirth;
-  String occupation;
-  String userKey;
+  final String name;
+  final String gender;
+  final String age;
+  final String dateOfBirth;
+  final String occupation;
+  final String userKey;
 
   User(
       {required this.name,

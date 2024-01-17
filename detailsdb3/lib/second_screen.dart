@@ -1,4 +1,5 @@
-import 'package:detailsdb/updatescreen.dart';
+import 'package:detailsdb/routes.dart';
+// import 'package:detailsdb/updatescreen.dart';
 import 'package:flutter/material.dart';
 import 'user.dart';
 
@@ -52,9 +53,29 @@ class _SecondScreenState extends State<SecondScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     // Navigator.push(context, MaterialPageRoute(builder: (context) => const UpdateScreen(userKey: user.userKey)));
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => UpdateScreen(userKey: user.userKey)));
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) =>
+                    //             UpdateScreen(userKey: user.userKey)));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: const SizedBox(
+                          height: 60.0, // Set the height you want
+                          child: Text(
+                            'User details updated',
+                            style: TextStyle(
+                                fontSize: 20), // Increase the font size
+                          ),
+                        ),
+                        duration: const Duration(seconds: 4),
+                        backgroundColor: Theme.of(context).primaryColor,
+                      ),
+                    );
+
+                    Navigator.pushNamed(context, Routes.homeScreen);
                   },
-                  child: const Text('Update'),
+                  child: const Text('Confirm'),
                 )),
           ],
         ),
