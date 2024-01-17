@@ -1,6 +1,5 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'user.dart';
 import 'routes.dart';
 
@@ -144,35 +143,92 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
               ),
             );
 
-            Fluttertoast.showToast(
-              msg: "User Details Updated",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.green,
-              textColor: Colors.white,
-              fontSize: 16.0,
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: const Text('User Details Updated'),
+                duration: const Duration(seconds: 3),
+                backgroundColor: Theme.of(context).primaryColor,
+              ),
             );
-          }).onError((error, stackTrace) {
-            Fluttertoast.showToast(
-              msg: "Error: ${error.toString()}",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 16.0,
-            );
-          });
+
+    
+          }
+          );
         }, 
           child: const Text("Update", style: TextStyle(
-          color: Colors.black,
-          fontSize: 20,
-          fontWeight: FontWeight.bold
-),
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.bold
+          ),
+          ),
+        )
         ),
-        )
-        )
+          Expanded(
+            child: Container()
+          ),
+          Container(
+            margin: const EdgeInsets.all(20),
+            width: double.infinity,
+            height: 55,
+            child: ElevatedButton(
+              onPressed: () {
+                // delete dialog box
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Delete Confirmation'),
+                      content: const Text('Are you sure you want to delete this user?'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, 'Cancel'),
+                          child: const Text('Cancel'),                          
+                        ),
+                        TextButton(
+                          onPressed: () {                            
+                            dbRef.child(widget.userKey).remove();  // delete from firebase database      
+                            
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: const Text('User deleted'),
+                                duration: const Duration(seconds: 3),                                
+                                backgroundColor: Colors.red,                               
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),                              
+                              ),
+                            );          
+                            Navigator.pushNamed(context, Routes.homeScreen); // redirect to home screen
+                          },                           
+                          child: const Text('OK'),
+                        ),
+                      ],                      
+                    );
+                  },
+                );
+              },
+              style: ButtonStyle(                
+                backgroundColor: MaterialStateProperty.all(Theme.of(context).scaffoldBackgroundColor),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),              
+                    side: const BorderSide(
+                      color: Colors.red,
+                      width: 1
+                    ),                   
+                  ),
+                ),
+              ),
+              child: const Text(
+                'Delete User',
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                )
+              ),           
+            ),
+          ),              
 ]),
       ),
 
