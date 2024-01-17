@@ -2,13 +2,13 @@ import 'package:detailsdb/updatescreen.dart';
 import 'package:flutter/material.dart';
 import 'routes.dart';
 // import 'first_screen.dart';
-import 'inputscreen.dart';
+import 'package:detailsdb/inputscreen.dart';
 import 'second_screen.dart';
 import 'homescreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-Future <void> main() async{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -36,6 +36,5 @@ class MyApp extends StatelessWidget {
           Routes.secondScreen: (context) => const SecondScreen(),
           Routes.updateScreen: (context) => const UpdateScreen(),
         });
-        
   }
 }

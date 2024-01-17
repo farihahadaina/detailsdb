@@ -25,6 +25,7 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
   void initState() {
     super.initState();
     dbRef = FirebaseDatabase.instance.ref().child("Users");
+
     getUserDetails();
   }
 
@@ -41,119 +42,132 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Row (
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-        Text("Update Information Details",
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 30,
-          fontWeight: FontWeight.bold
-        ),),
-      ],),
+      appBar: AppBar(
+        title: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Update Information Details",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
       ),
       // ignore: avoid_unnecessary_containers
       body: Container(
-        child: Column(children:[
-          const SizedBox(height: 20,),
+        child: Column(children: [
+          const SizedBox(
+            height: 20,
+          ),
           TextFormField(
             controller: nameController,
             decoration: const InputDecoration(
               hintStyle: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold
-              ),
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
               border: OutlineInputBorder(),
               labelText: "Enter Name",
             ),
           ),
-          const SizedBox(height: 20,),
+          const SizedBox(
+            height: 20,
+          ),
           TextFormField(
             controller: genderController,
             decoration: const InputDecoration(
               hintStyle: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold
-              ),
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
               border: OutlineInputBorder(),
               labelText: "Gender (M/F)",
             ),
           ),
-          const SizedBox(height: 20,),
+          const SizedBox(
+            height: 20,
+          ),
           TextFormField(
             controller: ageController,
             decoration: const InputDecoration(
               hintStyle: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold
-              ),
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
               border: OutlineInputBorder(),
               labelText: "Enter Age",
             ),
           ),
-          const SizedBox(height: 20, width: 20,),
+          const SizedBox(
+            height: 20,
+            width: 20,
+          ),
           TextFormField(
             controller: dobController,
             decoration: const InputDecoration(
               hintStyle: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold
-              ),
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
               border: OutlineInputBorder(),
               labelText: "Enter DOB",
             ),
           ),
-          const SizedBox(height: 20,),
+          const SizedBox(
+            height: 20,
+          ),
           TextFormField(
             controller: occupationController,
             decoration: const InputDecoration(
               hintStyle: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold
-              ),
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
               border: OutlineInputBorder(),
               labelText: "Enter Occupation",
-          ),),
-        const SizedBox(height: 30,),
-        Center(
-         child: ElevatedButton(
-          onPressed: (){
-            Map<String, String> users = {
-              'name' : nameController.text,
-              'gender' : genderController.text,
-              'age' : ageController.text,
-              'dob' : dobController.text,
-              'occupation' : occupationController.text,
-            };
+            ),
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          Center(
+              child: ElevatedButton(
+            onPressed: () {
+              Map<String, String> users = {
+                'name': nameController.text,
+                'gender': genderController.text,
+                'age': ageController.text,
+                'dob': dobController.text,
+                'occupation': occupationController.text,
+              };
 
-            dbRef.child(widget.userKey).update(users).then((value) => {
-            Navigator.pushNamed(context, Routes.secondScreen,
-                            arguments: User(
-                                userKey: widget.userKey,
-                                name: nameController.text,
-                                gender: genderController.text,
-                                age: ageController.text,
-                                dateOfBirth: dobController.text,
-                                occupation: occupationController.text)) 
-            });
-            // dbRef.push().set(users);
-        }, 
-          child: const Text("Update", style: TextStyle(
-          color: Colors.black,
-          fontSize: 20,
-          fontWeight: FontWeight.bold
-),
-        ),
-        )
-        )
-]),
+              Navigator.pop(context);
+
+              dbRef.child(widget.userKey).update(users).then((value) => {
+                    Navigator.pushNamed(context, Routes.secondScreen,
+                        arguments: User(
+                            userKey: widget.userKey,
+                            name: nameController.text,
+                            gender: genderController.text,
+                            age: ageController.text,
+                            dateOfBirth: dobController.text,
+                            occupation: occupationController.text))
+                  });
+              // dbRef.push().set(users);
+            },
+            child: const Text(
+              "Update",
+              style: TextStyle(
+                  color: Color.fromRGBO(0, 0, 0, 1),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+            ),
+          ))
+        ]),
       ),
-
     );
   }
 }

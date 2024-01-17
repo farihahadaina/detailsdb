@@ -30,6 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  focused_menu: ^1.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -44,7 +45,6 @@ dev_dependencies:
 
  # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
   date_time_picker: ^2.1.0
 
 
