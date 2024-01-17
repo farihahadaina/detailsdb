@@ -61,22 +61,19 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
         child: Column(children:[                  
           const SizedBox(height: 20,),
           TextFormField(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
             controller: nameController,
-            decoration: const InputDecoration( 
+            decoration: const InputDecoration(              
               border: OutlineInputBorder(),
               labelText: "Enter Name",
-              ),             
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Please enter your name';
-                }
-                return null; // Valid input
-              },
+            ),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Please enter your name';
+              }
+            },
           ),
           const SizedBox(height: 20,),
           TextFormField(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
             controller: genderController,
             decoration: const InputDecoration(
               hintText: "M or F",
@@ -86,31 +83,17 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
               border: OutlineInputBorder(),
               labelText: "Enter Gender",
             ),
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Please enter your gender';
-              }
-              return null;
-            }
           ),
           const SizedBox(height: 20,),
           TextFormField(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
             controller: ageController,
             decoration: const InputDecoration(              
               border: OutlineInputBorder(),
               labelText: "Enter Age",
             ),
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Please enter your age';
-              }
-              return null;
-            }
           ),
           const SizedBox(height: 15, width: 20,),
           TextFormField(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
             controller: dobController,
             decoration: const InputDecoration(
               hintText: "dd/mm/yyyy",
@@ -120,28 +103,14 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
               border: OutlineInputBorder(),
               labelText: "Enter DOB",
             ),
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Please enter your date of birth';
-              }
-              return null;
-            }
           ),
           const SizedBox(height: 15,),
           TextFormField(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
             controller: occupationController,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               labelText: "Enter Occupation",
-            ),
-            validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Please enter your gender';
-                }
-                return null;
-              }
-          ),
+          ),),
         const SizedBox(height: 20,),
         Center(
           child: Container(                   
@@ -149,7 +118,7 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
             height: 55,           
             child: ElevatedButton(
               onPressed: (){
-                if (_formKey.currentState!.validate()) {
+                if(_formKey.currentState!.validate()){
                 Map<String, String> users = {
                   'name' : nameController.text,
                   'gender' : genderController.text,
@@ -177,8 +146,8 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
                   );                      
                 } 
                 );
-                } 
-              },
+              }
+              }, 
               child: const Text("Update", style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
