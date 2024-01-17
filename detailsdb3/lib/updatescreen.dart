@@ -13,8 +13,6 @@ class UpdateScreen extends StatefulWidget {
 }
 
 class _MyUpdateScreenState extends State<UpdateScreen> {
-  final _formKey = GlobalKey<FormState>();
-
   final TextEditingController nameController = TextEditingController();
   final TextEditingController genderController = TextEditingController();
   final TextEditingController ageController = TextEditingController();
@@ -66,11 +64,6 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
               border: OutlineInputBorder(),
               labelText: "Enter Name",
             ),
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Please enter your name';
-              }
-            },
           ),
           const SizedBox(height: 20,),
           TextFormField(
@@ -118,7 +111,7 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
             height: 55,           
             child: ElevatedButton(
               onPressed: (){
-                if(_formKey.currentState!.validate()){
+                
                 Map<String, String> users = {
                   'name' : nameController.text,
                   'gender' : genderController.text,
@@ -146,7 +139,7 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
                   );                      
                 } 
                 );
-              }
+              
               }, 
               child: const Text("Update", style: TextStyle(
                 color: Colors.white,
