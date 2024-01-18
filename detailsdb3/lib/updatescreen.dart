@@ -1,13 +1,9 @@
-import 'dart:developer';
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'user.dart';
 import 'routes.dart';
 
 class UpdateScreen extends StatefulWidget {
-  // const UpdateScreen({Key? key, this.userKey = ''}) : super(key: key);
-
   final String userKey;
   final Map<String, dynamic> data;
   const UpdateScreen({Key? key, required this.data, required this.userKey})
@@ -18,11 +14,6 @@ class UpdateScreen extends StatefulWidget {
 }
 
 class _MyUpdateScreenState extends State<UpdateScreen> {
-  // final TextEditingController nameController = TextEditingController();
-  // final TextEditingController genderController = TextEditingController();
-  // final TextEditingController ageController = TextEditingController();
-  // final TextEditingController dobController = TextEditingController();
-  // final TextEditingController occupationController = TextEditingController();
   late TextEditingController nameController;
   late TextEditingController genderController;
   late TextEditingController ageController;
@@ -33,16 +24,10 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
   late DatabaseReference dbRef;
 
   @override
-  // void initState() {
-  //   super.initState();
-  //   dbRef = FirebaseDatabase.instance.ref().child("Users");
-  //   getUserDetails();
-  // }
   void initState() {
     super.initState();
     super.initState();
     dbRef = FirebaseDatabase.instance.ref().child("Users");
-    // getUserDetails();
 
     nameController = TextEditingController(text: widget.data['name']);
     genderController = TextEditingController(text: widget.data['gender']);
@@ -52,16 +37,6 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
         TextEditingController(text: widget.data['occupation']);
     userKeyController = TextEditingController(text: widget.userKey);
   }
-
-  // void getUserDetails() async {
-  //   DataSnapshot snapshot = await dbRef.child(widget.userKey).get();
-  //   Map user = snapshot.value as Map;
-  //   nameController.text = user['name'];
-  //   genderController.text = user['gender'];
-  //   ageController.text = user['age'];
-  //   dobController.text = user['dob'];
-  //   occupationController.text = user['occupation'];
-  // }
 
   @override
   void dispose() {
@@ -185,13 +160,6 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
                       occupation: occupationController.text,
                     ),
                   );
-                  // ScaffoldMessenger.of(context).showSnackBar(
-                  //   SnackBar(
-                  //     content: const Text('User details updated'),
-                  //     duration: const Duration(seconds: 3),
-                  //     backgroundColor: Theme.of(context).primaryColor,
-                  //   ),
-                  // );
                 });
               },
               child: const Text(

@@ -1,10 +1,8 @@
-// import 'package:detailsdb/second_screen.dart';
 import 'package:detailsdb/updatescreen.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:detailsdb/inputscreen.dart';
 import 'package:flutter/material.dart';
-// import 'user.dart';
 
 String capitalize(String text) {
   if (text.isEmpty) {
@@ -57,22 +55,6 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                       return Container();
                     }
                     return GestureDetector(
-                        // onTap: () {
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => UpdateScreen(
-                        //               userKey: snapshot.key,
-                        //               data: snapshot.value
-                        //                   as Map<String, dynamic>,
-                        //             )),
-                        //     // Navigator.push(
-                        //     //     context,
-                        //     //     MaterialPageRoute(
-                        //     //         builder: (context) =>
-                        //     //             UpdateScreen(userKey: user.userKey)));
-                        //   );
-                        // },
                         child: Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),

@@ -1,5 +1,4 @@
 import 'package:detailsdb/homescreen.dart';
-// import 'package:detailsdb/updatescreen.dart';
 import 'package:flutter/material.dart';
 import 'user.dart';
 
@@ -59,7 +58,6 @@ class _SecondScreenState extends State<SecondScreen> {
                         backgroundColor: Theme.of(context).primaryColor,
                       ),
                     );
-                    // Navigator.push(context, MaterialPageRoute(builder: (context) => const UpdateScreen(userKey: user.userKey)));
                     Navigator.push(
                         context,
                         MaterialPageRoute(
