@@ -18,6 +18,7 @@ class UpdateScreen extends StatefulWidget {
 }
 
 class _MyUpdateScreenState extends State<UpdateScreen> {
+  final _formKey = GlobalKey<FormState>();
   late TextEditingController nameController;
   late TextEditingController genderController;
   late TextEditingController ageController;
@@ -37,8 +38,7 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
     genderController = TextEditingController(text: widget.data['gender']);
     ageController = TextEditingController(text: widget.data['age']);
     dobController = TextEditingController(text: widget.data['dob']);
-    occupationController =
-        TextEditingController(text: widget.data['occupation']);
+    occupationController = TextEditingController(text: widget.data['occupation']);
     userKeyController = TextEditingController(text: widget.userKey);
   }
 
@@ -74,12 +74,14 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
       ),
       // ignore: avoid_unnecessary_containers
       body: Container(
+        key: _formKey,
         margin: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(children: [
           const SizedBox(
             height: 20,
           ),
           TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             controller: nameController,
             decoration: const InputDecoration(
               hintText: "e.g. Ali Ahmad",
@@ -89,11 +91,18 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
               border: OutlineInputBorder(),
               labelText: "Enter Name",
             ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter your name';
+              }
+              return null;
+            },
           ),
           const SizedBox(
             height: 20,
           ),
           TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             controller: genderController,
             decoration: const InputDecoration(
               hintText: "M or F",
@@ -103,11 +112,18 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
               border: OutlineInputBorder(),
               labelText: "Enter Gender",
             ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter your gender';
+              }
+              return null;
+            },
           ),
           const SizedBox(
             height: 20,
           ),
           TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             controller: ageController,
             decoration: const InputDecoration(
               hintText: "e.g. 20",
@@ -117,11 +133,18 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
               border: OutlineInputBorder(),
               labelText: "Enter Age",
             ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter your age';
+              }
+              return null;
+            },
           ),
           const SizedBox(
             height: 20,            
           ),
           TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             controller: dobController,
             decoration: const InputDecoration(
               hintText: "dd/mm/yyyy",
@@ -131,11 +154,18 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
               border: OutlineInputBorder(),
               labelText: "Enter DOB",
             ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter your date of birth';
+              }
+              return null;
+            },
           ),
           const SizedBox(
             height: 20,
           ),
           TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             controller: occupationController,
             decoration: const InputDecoration(
               hintText: "e.g. Teacher, Engineer, etc",
@@ -145,6 +175,12 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
               border: OutlineInputBorder(),
               labelText: "Enter Occupation",
             ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter your occupation';
+              }
+              return null;
+            },
           ),
           const SizedBox(
             height: 30,
