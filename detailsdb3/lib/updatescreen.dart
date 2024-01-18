@@ -74,217 +74,221 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
       ),
       // ignore: avoid_unnecessary_containers
       body: Container(
+          child: Form(
         key: _formKey,
-        margin: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(children: [
-          const SizedBox(
-            height: 20,
-          ),
-          TextFormField(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            controller: nameController,
-            decoration: const InputDecoration(
-              hintText: "e.g. Ali Ahmad",
-              hintStyle: TextStyle(
-                fontSize: 15,
-              ),                                          
-              border: OutlineInputBorder(),
-              labelText: "Enter Name",
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(children: [
+            const SizedBox(
+              height: 20,
             ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter your name';
-              }
-              return null;
-            },
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          TextFormField(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            controller: genderController,
-            decoration: const InputDecoration(
-              hintText: "M or F",
-              hintStyle: TextStyle(
-                fontSize: 15,
+            TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              controller: nameController,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: "Enter Name",
               ),
-              border: OutlineInputBorder(),
-              labelText: "Enter Gender",
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter your gender';
-              }
-              return null;
-            },
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          TextFormField(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            controller: ageController,
-            decoration: const InputDecoration(
-              hintText: "e.g. 20",
-              hintStyle: TextStyle(
-                fontSize: 15,
-              ),                                          
-              border: OutlineInputBorder(),
-              labelText: "Enter Age",
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter your age';
-              }
-              return null;
-            },
-          ),
-          const SizedBox(
-            height: 20,            
-          ),
-          TextFormField(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            controller: dobController,
-            decoration: const InputDecoration(
-              hintText: "dd/mm/yyyy",
-              hintStyle: TextStyle(
-                fontSize: 15,
-              ),
-              border: OutlineInputBorder(),
-              labelText: "Enter DOB",
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter your date of birth';
-              }
-              return null;
-            },
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          TextFormField(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            controller: occupationController,
-            decoration: const InputDecoration(
-              hintText: "e.g. Teacher, Engineer, etc",
-              hintStyle: TextStyle(
-                fontSize: 15,
-              ),              
-              border: OutlineInputBorder(),
-              labelText: "Enter Occupation",
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter your occupation';
-              }
-              return null;
-            },
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Center(
-              child: SizedBox(
-            width: double.infinity,
-            height: 55,
-            child: ElevatedButton(
-              onPressed: () {
-                Map<String, dynamic> users = {
-                  'name': nameController.text,
-                  'gender': genderController.text,
-                  'age': ageController.text,
-                  'dob': dobController.text,
-                  'occupation': occupationController.text,
-                };
-                dbRef.child(widget.userKey).update(users).then((value) {
-                  Navigator.pushNamed(
-                    context,
-                    Routes.secondScreen,
-                    arguments: User(
-                      userKey: userKeyController.text,
-                      name: nameController.text,
-                      gender: genderController.text,
-                      age: ageController.text,
-                      dateOfBirth: dobController.text,
-                      occupation: occupationController.text,
-                    ),
-                  );
-                });
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your name';
+                }
+                return null;
               },
-              child: const Text(
-                "Update",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-              ),
             ),
-          )),
-          Expanded(child: Container()),
-          Container(
-            margin: const EdgeInsets.only(bottom: 20),
-            width: double.infinity,
-            height: 55,
-            child: ElevatedButton(
-              onPressed: () {
-                // delete dialog box
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text('Delete Confirmation'),
-                      content: const Text(
-                          'Are you sure you want to delete this user?'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () => Navigator.pop(context, 'Cancel'),
-                          child: const Text('Cancel'),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            dbRef
-                                .child(widget.userKey)
-                                .remove(); // delete from firebase database
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('User deleted'),
-                                duration: Duration(seconds: 3),
-                                backgroundColor: Colors.red,
-                              ),
-                            );
-                            Navigator.pushNamed(context,
-                                Routes.homeScreen); // redirect to home screen
-                          },
-                          child: const Text('OK'),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              },
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                    Theme.of(context).scaffoldBackgroundColor),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    side: const BorderSide(color: Colors.red, width: 1),
-                  ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              controller: genderController,
+              decoration: const InputDecoration(
+                hintText: "M or F",
+                hintStyle: TextStyle(
+                  fontSize: 15,
                 ),
-                elevation: MaterialStateProperty.all(0), //to remove the shadow
+                border: OutlineInputBorder(),
+                labelText: "Enter Gender",
               ),
-              child: const Text('Delete User',
-                  style: TextStyle(
-                    color: Colors.red,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  )),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your gender';
+                }
+                return null;
+              },
             ),
-          ),
-        ]),
-      ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              controller: ageController,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: "Enter Age",
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your age';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(
+              height: 15,
+              width: 20,
+            ),
+            TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              controller: dobController,
+              decoration: const InputDecoration(
+                hintText: "dd/mm/yyyy",
+                hintStyle: TextStyle(
+                  fontSize: 15,
+                ),
+                border: OutlineInputBorder(),
+                labelText: "Enter DOB",
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your date of birth';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              controller: occupationController,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: "Enter Occupation",
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your occupation';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Center(
+                child: SizedBox(
+              width: double.infinity,
+              height: 55,
+              child: ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState != null &&
+                      _formKey.currentState!.validate()) {
+                    // If the form is valid, update the user.
+                    Map<String, dynamic> users = {
+                      'name': nameController.text,
+                      'gender': genderController.text,
+                      'age': ageController.text,
+                      'dob': dobController.text,
+                      'occupation': occupationController.text,
+                    };
+                    dbRef.child(widget.userKey).update(users).then((value) {
+                      Navigator.pushNamed(
+                        context,
+                        Routes.secondScreen,
+                        arguments: User(
+                          userKey: userKeyController.text,
+                          name: nameController.text,
+                          gender: genderController.text,
+                          age: ageController.text,
+                          dateOfBirth: dobController.text,
+                          occupation: occupationController.text,
+                        ),
+                      );
+                    });
+                    // Display a Snackbar.
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Processing Data')));
+                  } else {
+                    // If the form is invalid, display a Snackbar.
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('Please fill in all fields')));
+                  }
+                },
+                child: const Text(
+                  "Update",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            )),
+            Expanded(child: Container()),
+            Container(
+              margin: const EdgeInsets.only(bottom: 20),
+              width: double.infinity,
+              height: 55,
+              child: ElevatedButton(
+                onPressed: () {
+                  // delete dialog box
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Delete Confirmation'),
+                        content: const Text(
+                            'Are you sure you want to delete this user?'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'Cancel'),
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              dbRef
+                                  .child(widget.userKey)
+                                  .remove(); // delete from firebase database
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('User deleted'),
+                                  duration: Duration(seconds: 3),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                              Navigator.pushNamed(context,
+                                  Routes.homeScreen); // redirect to home screen
+                            },
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                      Theme.of(context).scaffoldBackgroundColor),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      side: const BorderSide(color: Colors.red, width: 1),
+                    ),
+                  ),
+                  elevation:
+                      MaterialStateProperty.all(0), //to remove the shadow
+                ),
+                child: const Text('Delete User',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ),
+            ),
+          ]),
+        ),
+      )),
     );
   }
 }
