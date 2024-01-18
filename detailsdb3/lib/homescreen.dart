@@ -1,10 +1,8 @@
-// import 'package:detailsdb/second_screen.dart';
 import 'package:detailsdb/updatescreen.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:detailsdb/inputscreen.dart';
 import 'package:flutter/material.dart';
-// import 'user.dart';
 
 String capitalize(String text) {
   if (text.isEmpty) {
@@ -13,19 +11,8 @@ String capitalize(String text) {
   return text[0].toUpperCase() + text.substring(1);
 }
 
-// User fromSnapshot(DataSnapshot snapshot) {
-//   return User(
-//     name: snapshot.value['name'],
-//     gender: snapshot.value['gender'],
-//     age: snapshot.value['age'],
-//     dateOfBirth: snapshot.value['dateOfBirth'],
-//     occupation: snapshot.value['occupation'],
-//     userKey: snapshot.key!,
-//   );
-// }
-
 class MyHomeScreen extends StatefulWidget {
-  const MyHomeScreen({Key? key}) : super(key: key);
+  const MyHomeScreen({super.key});
 
   @override
   State<MyHomeScreen> createState() => _MyHomeScreenState();
@@ -68,43 +55,49 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                       return Container();
                     }
                     return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const UpdateScreen()),
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) =>
-                            //             UpdateScreen(userKey: user.userKey)));
-                          );
-                        },
                         child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      margin: const EdgeInsets.all(10),
+                      child: ListTile(
+                          title: Text(
+                            capitalize(snapshot.child("name").value.toString()),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
                           ),
-                          margin: const EdgeInsets.all(10),
-                          child: ListTile(
-                            title: Text(
-                              capitalize(
-                                  snapshot.child("name").value.toString()),
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                          subtitle: Text(
+                            '\n'
+                            'Gender : ${capitalize(snapshot.child("gender").value.toString())} \n'
+                            'Age : ${capitalize(snapshot.child("age").value.toString())} \n'
+                            'Date of Birth : ${capitalize(snapshot.child("dob").value.toString())} \n'
+                            'Occupation : ${capitalize(snapshot.child("occupation").value.toString())}',
+                          ),
+                          trailing: const Icon(Icons.edit),
+                          onTap: () {
+                            Map<String, dynamic> userData = {
+                              'name': snapshot.child("name").value.toString(),
+                              'gender':
+                                  snapshot.child("gender").value.toString(),
+                              'age': snapshot.child("age").value.toString(),
+                              'dob': snapshot.child("dob").value.toString(),
+                              'occupation':
+                                  snapshot.child("occupation").value.toString(),
+                            };
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => UpdateScreen(
+                                  userKey: snapshot.key!,
+                                  data: userData,
+                                ),
                               ),
-                            ),
-                            // subtitle: Text(snapshot.child("age").value.toString()),
-                            subtitle: Text(
-                              '\n'
-                              'Gender : ${capitalize(snapshot.child("gender").value.toString())} \n'
-                              'Age : ${capitalize(snapshot.child("age").value.toString())} \n'
-                              'Date of Birth : ${capitalize(snapshot.child("dob").value.toString())} \n'
-                              'Occupation : ${capitalize(snapshot.child("occupation").value.toString())}',
-                            ),
-                            trailing: const Icon(Icons.edit),
-                          ),
-                        ));
+                            );
+                          }),
+                    ));
                   })),
         ],
       ),

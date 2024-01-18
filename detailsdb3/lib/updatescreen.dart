@@ -4,38 +4,49 @@ import 'user.dart';
 import 'routes.dart';
 
 class UpdateScreen extends StatefulWidget {
-  const UpdateScreen({Key? key, this.userKey = ''}) : super(key: key);
-
   final String userKey;
+  final Map<String, dynamic> data;
+  const UpdateScreen({Key? key, required this.data, required this.userKey})
+      : super(key: key);
 
   @override
   State<UpdateScreen> createState() => _MyUpdateScreenState();
 }
 
 class _MyUpdateScreenState extends State<UpdateScreen> {
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController genderController = TextEditingController();
-  final TextEditingController ageController = TextEditingController();
-  final TextEditingController dobController = TextEditingController();
-  final TextEditingController occupationController = TextEditingController();
+  late TextEditingController nameController;
+  late TextEditingController genderController;
+  late TextEditingController ageController;
+  late TextEditingController dobController;
+  late TextEditingController occupationController;
+  late TextEditingController userKeyController;
 
   late DatabaseReference dbRef;
 
   @override
   void initState() {
     super.initState();
+    super.initState();
     dbRef = FirebaseDatabase.instance.ref().child("Users");
-    getUserDetails();
+
+    nameController = TextEditingController(text: widget.data['name']);
+    genderController = TextEditingController(text: widget.data['gender']);
+    ageController = TextEditingController(text: widget.data['age']);
+    dobController = TextEditingController(text: widget.data['dob']);
+    occupationController =
+        TextEditingController(text: widget.data['occupation']);
+    userKeyController = TextEditingController(text: widget.userKey);
   }
 
-  void getUserDetails() async {
-    DataSnapshot snapshot = await dbRef.child(widget.userKey).get();
-    Map user = snapshot.value as Map;
-    nameController.text = user['name'];
-    genderController.text = user['gender'];
-    ageController.text = user['age'];
-    dobController.text = user['dob'];
-    occupationController.text = user['occupation'];
+  @override
+  void dispose() {
+    nameController.dispose();
+    genderController.dispose();
+    ageController.dispose();
+    dobController.dispose();
+    occupationController.dispose();
+    userKeyController.dispose();
+    super.dispose();
   }
 
   @override
@@ -129,10 +140,7 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
             height: 55,
             child: ElevatedButton(
               onPressed: () {
-
-              onPressed: (){
-                
-                Map<String, String> users = {
+                Map<String, dynamic> users = {
                   'name': nameController.text,
                   'gender': genderController.text,
                   'age': ageController.text,
@@ -144,19 +152,12 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
                     context,
                     Routes.secondScreen,
                     arguments: User(
-                      userKey: widget.userKey,
+                      userKey: userKeyController.text,
                       name: nameController.text,
                       gender: genderController.text,
                       age: ageController.text,
                       dateOfBirth: dobController.text,
                       occupation: occupationController.text,
-                    ),
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: const Text('User details updated'),
-                      duration: const Duration(seconds: 3),
-                      backgroundColor: Theme.of(context).primaryColor,
                     ),
                   );
                 });
@@ -167,16 +168,6 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.bold),
-                  );                      
-                } 
-                );
-              
-              }, 
-              child: const Text("Update", style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold
-              ),
               ),
             ),
           )),

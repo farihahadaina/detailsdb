@@ -1,7 +1,6 @@
 import 'package:detailsdb/updatescreen.dart';
 import 'package:flutter/material.dart';
 import 'routes.dart';
-// import 'first_screen.dart';
 import 'inputscreen.dart';
 import 'second_screen.dart';
 import 'homescreen.dart';
@@ -28,13 +27,15 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.indigo,
         ),
-        // home: const MyHomePage(title: 'Flutter Form Widget'),
         initialRoute: Routes.homeScreen,
         routes: {
           Routes.homeScreen: (context) => const MyHomeScreen(),
           Routes.firstScreen: (context) => const MyInputScreen(),
           Routes.secondScreen: (context) => const SecondScreen(),
-          Routes.updateScreen: (context) => const UpdateScreen(),
+          Routes.updateScreen: (context) => const UpdateScreen(
+                data: {},
+                userKey: '',
+              ),
         });
   }
 }
