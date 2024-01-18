@@ -129,6 +129,9 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
             height: 55,
             child: ElevatedButton(
               onPressed: () {
+
+              onPressed: (){
+                
                 Map<String, String> users = {
                   'name': nameController.text,
                   'gender': genderController.text,
@@ -164,6 +167,16 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.bold),
+                  );                      
+                } 
+                );
+              
+              }, 
+              child: const Text("Update", style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold
+              ),
               ),
             ),
           )),

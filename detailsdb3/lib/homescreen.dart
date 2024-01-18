@@ -25,7 +25,7 @@ String capitalize(String text) {
 // }
 
 class MyHomeScreen extends StatefulWidget {
-  const MyHomeScreen({super.key});
+  const MyHomeScreen({Key? key}) : super(key: key);
 
   @override
   State<MyHomeScreen> createState() => _MyHomeScreenState();
