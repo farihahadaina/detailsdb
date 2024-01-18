@@ -12,7 +12,7 @@
 1. MARYAM UMAIRAH - Create a widget for user to update details.
 2. FARIHA HADAINA - Create a widget for user to delete details and firebase setup.
 3. NADIRAH - Create home screen and input screen for user to insert details.
-4. ANEESA NADIRA - Create widget for user to view details.**
+4. ANEESA NADIRA - Create widget for user to view details.
    
 
 *Description:* 
