@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         routes: {
           Routes.homeScreen: (context) => const MyHomeScreen(),
           Routes.firstScreen: (context) => const MyInputScreen(),
-          Routes.secondScreen: (context) => const SecondScreen(),
+          Routes.secondScreen: (context) => const SecondScreen(userKey: ''),
           Routes.updateScreen: (context) => const UpdateScreen(
                 data: {},
                 userKey: '',

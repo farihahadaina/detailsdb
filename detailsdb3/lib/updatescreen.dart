@@ -182,30 +182,19 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
               height: 55,
               child: ElevatedButton(
                 onPressed: () {
-                  if (_formKey.currentState != null &&
-                      _formKey.currentState!.validate()) {
-                    // If the form is valid, update the user.
-                    Map<String, dynamic> users = {
-                      'name': nameController.text,
-                      'gender': genderController.text,
-                      'age': ageController.text,
-                      'dob': dobController.text,
-                      'occupation': occupationController.text,
-                    };
-                    dbRef.child(widget.userKey).update(users).then((value) {
-                      Navigator.pushNamed(
-                        context,
-                        Routes.secondScreen,
-                        arguments: User(
-                          userKey: userKeyController.text,
-                          name: nameController.text,
-                          gender: genderController.text,
-                          age: ageController.text,
-                          dateOfBirth: dobController.text,
-                          occupation: occupationController.text,
-                        ),
-                      );
-                    });
+                  if (_formKey.currentState != null && _formKey.currentState!.validate()) {
+                    Navigator.pushNamed(
+                      context,
+                      Routes.secondScreen,
+                      arguments: User(
+                        userKey: userKeyController.text,
+                        name: nameController.text,
+                        gender: genderController.text,
+                        age: ageController.text,
+                        dateOfBirth: dobController.text,
+                        occupation: occupationController.text,
+                      ),
+                    );
                     // Display a Snackbar.
                     ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Processing Data')));
