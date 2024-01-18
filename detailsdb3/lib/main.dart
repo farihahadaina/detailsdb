@@ -1,5 +1,5 @@
 /*
-  Developers: Aneesa (2016174), Maryam (2110256), Fariha Hadaina (2114478)
+  Developers: Aneesa (2016174), Maryam Umairah (2110256), Fariha Hadaina (2114478)
 */
 
 import 'package:detailsdb/updatescreen.dart';
