@@ -1,5 +1,5 @@
 /*
-  Developers: Maryam (2110256), Fariha Hadaina (2114478)
+  Developers: Maryam Umairah (2110256), Fariha Hadaina (2114478)
 */
 
 import 'package:firebase_database/firebase_database.dart';
