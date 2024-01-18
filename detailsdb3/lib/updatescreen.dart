@@ -185,13 +185,6 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
                       occupation: occupationController.text,
                     ),
                   );
-                  // ScaffoldMessenger.of(context).showSnackBar(
-                  //   SnackBar(
-                  //     content: const Text('User details updated'),
-                  //     duration: const Duration(seconds: 3),
-                  //     backgroundColor: Theme.of(context).primaryColor,
-                  //   ),
-                  // );
                 });
               },
               child: const Text(
