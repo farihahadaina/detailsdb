@@ -8,7 +8,7 @@ import 'homescreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-Future <void> main() async{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -34,8 +34,10 @@ class MyApp extends StatelessWidget {
           Routes.homeScreen: (context) => const MyHomeScreen(),
           Routes.firstScreen: (context) => const MyInputScreen(),
           Routes.secondScreen: (context) => const SecondScreen(),
-          Routes.updateScreen: (context) => const UpdateScreen(),
+          Routes.updateScreen: (context) => const UpdateScreen(
+                data: {},
+                userKey: '',
+              ),
         });
-        
   }
 }
