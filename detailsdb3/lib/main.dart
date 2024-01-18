@@ -1,3 +1,7 @@
+/*
+  Developers: Aneesa (2016174), Maryam (2110256), Fariha Hadaina (2114478)
+*/
+
 import 'package:detailsdb/updatescreen.dart';
 import 'package:flutter/material.dart';
 import 'routes.dart';
@@ -25,7 +29,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Form Widget',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.indigo,
+          primarySwatch: Colors.blue,
         ),
         initialRoute: Routes.homeScreen,
         routes: {

@@ -1,3 +1,7 @@
+/*
+  Developers: Maryam (2110256), Fariha Hadaina (2114478)
+*/
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'user.dart';
@@ -78,6 +82,10 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
           TextFormField(
             controller: nameController,
             decoration: const InputDecoration(
+              hintText: "e.g. Ali Ahmad",
+              hintStyle: TextStyle(
+                fontSize: 15,
+              ),                                          
               border: OutlineInputBorder(),
               labelText: "Enter Name",
             ),
@@ -102,13 +110,16 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
           TextFormField(
             controller: ageController,
             decoration: const InputDecoration(
+              hintText: "e.g. 20",
+              hintStyle: TextStyle(
+                fontSize: 15,
+              ),                                          
               border: OutlineInputBorder(),
               labelText: "Enter Age",
             ),
           ),
           const SizedBox(
-            height: 15,
-            width: 20,
+            height: 20,            
           ),
           TextFormField(
             controller: dobController,
@@ -122,17 +133,21 @@ class _MyUpdateScreenState extends State<UpdateScreen> {
             ),
           ),
           const SizedBox(
-            height: 15,
+            height: 20,
           ),
           TextFormField(
             controller: occupationController,
             decoration: const InputDecoration(
+              hintText: "e.g. Teacher, Engineer, etc",
+              hintStyle: TextStyle(
+                fontSize: 15,
+              ),              
               border: OutlineInputBorder(),
               labelText: "Enter Occupation",
             ),
           ),
           const SizedBox(
-            height: 20,
+            height: 30,
           ),
           Center(
               child: SizedBox(

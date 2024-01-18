@@ -1,3 +1,7 @@
+/*
+  Developers: Nadirah (2027832), Aneesa (2016174), Fariha Hadaina (2114478)
+*/
+
 import 'package:detailsdb/updatescreen.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
@@ -32,8 +36,8 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
             Text(
               "Information Details",
               style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 30,
+                  color: Colors.white,
+                  fontSize: 25,
                   fontWeight: FontWeight.bold),
             ),
           ],

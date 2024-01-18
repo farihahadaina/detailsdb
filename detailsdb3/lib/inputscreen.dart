@@ -1,4 +1,7 @@
-//import 'package:firebase_core/firebase_core.dart';
+/*
+  Developers: Nadirah (2027832), Fariha Hadaina (2114478)
+*/
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'user.dart';
@@ -31,19 +34,21 @@ class _MyInputScreenState extends State<MyInputScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(title: const Row (
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
         Text("Enter Your Details",
         style: TextStyle(
-          color: Colors.black,
-          fontSize: 30,
+          color: Colors.white,
+          fontSize: 25,
           fontWeight: FontWeight.bold
         ),),
       ],),
       ),
       // ignore: avoid_unnecessary_containers
       body: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 20),
         child: Form(
           key: _formKey,
         child: Column(
@@ -53,11 +58,10 @@ class _MyInputScreenState extends State<MyInputScreen> {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             controller: nameController,
             decoration: const InputDecoration(
+              hintText: "e.g. Ali Ahmad",
               hintStyle: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold
-              ),
+                fontSize: 15,
+              ),                                          
               border: OutlineInputBorder(),
               labelText: "Enter Name",
             ),
@@ -73,13 +77,12 @@ class _MyInputScreenState extends State<MyInputScreen> {
           autovalidateMode: AutovalidateMode.onUserInteraction,
             controller: genderController,
             decoration: const InputDecoration(
+              hintText: "M or F",
               hintStyle: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold
+                fontSize: 15,
               ),
               border: OutlineInputBorder(),
-              labelText: "Gender (M/F)",
+              labelText: "Enter Gender",
             ),
             validator: (value) {
              if (value!.isEmpty) {
@@ -92,11 +95,10 @@ class _MyInputScreenState extends State<MyInputScreen> {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             controller: ageController,
             decoration: const InputDecoration(
+              hintText: "e.g. 20",
               hintStyle: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold
-              ),
+                fontSize: 15,
+              ),                                          
               border: OutlineInputBorder(),
               labelText: "Enter Age",
             ),
@@ -111,11 +113,10 @@ class _MyInputScreenState extends State<MyInputScreen> {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             controller: dobController,
             decoration: const InputDecoration(
+              hintText: "dd/mm/yyyy",
               hintStyle: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold
-              ),
+                fontSize: 15,
+              ),              
               border: OutlineInputBorder(),
               labelText: "Enter DOB",
             ),
@@ -130,11 +131,10 @@ class _MyInputScreenState extends State<MyInputScreen> {
           autovalidateMode: AutovalidateMode.onUserInteraction,
             controller: occupationController,
             decoration: const InputDecoration(
+              hintText: "e.g. Teacher, Engineer, etc",
               hintStyle: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold
-              ),
+                fontSize: 15,
+              ),                                          
               border: OutlineInputBorder(),
               labelText: "Enter Occupation",
           ),
@@ -145,41 +145,45 @@ class _MyInputScreenState extends State<MyInputScreen> {
             return null; // Valid input
             },          ),
         const SizedBox(height: 30,),
-        Center(
-         child: ElevatedButton(
-          onPressed: (){
-          if(_formKey.currentState!.validate()){
-            Map<String, String> users = {
-              'name' : nameController.text,
-              'gender' : genderController.text,
-              'age' : ageController.text,
-              'dob' : dobController.text,
-              'occupation' : occupationController.text,
-            };
-            
-            DatabaseReference newRef = dbRef.push();
-            newRef.set(users);
-
-            Navigator.pushNamed(
-              context,
-              Routes.secondScreen,
-              arguments: User(
-                userKey: newRef.key!,
-                name: nameController.text,
-                gender: genderController.text,
-                age: ageController.text,
-                dateOfBirth: dobController.text,
-                occupation: occupationController.text,
-              ),
-            );
-          }},
-          child: const Text("Add", style: TextStyle(
-          color: Colors.black,
-          fontSize: 20,
-          fontWeight: FontWeight.bold
-),
-        ),
-        )
+        Center(          
+         child: SizedBox(
+            width: double.infinity,
+            height: 55,
+           child: ElevatedButton(
+            onPressed: (){
+            if(_formKey.currentState!.validate()){
+              Map<String, String> users = {
+                'name' : nameController.text,
+                'gender' : genderController.text,
+                'age' : ageController.text,
+                'dob' : dobController.text,
+                'occupation' : occupationController.text,
+              };
+              
+              DatabaseReference newRef = dbRef.push();
+              newRef.set(users);
+         
+              Navigator.pushNamed(
+                context,
+                Routes.secondScreen,
+                arguments: User(
+                  userKey: newRef.key!,
+                  name: nameController.text,
+                  gender: genderController.text,
+                  age: ageController.text,
+                  dateOfBirth: dobController.text,
+                  occupation: occupationController.text,
+                ),
+              );
+            }},
+            child: const Text("Add", style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold
+            ),
+                 ),
+                 ),
+         )
         )
 ]),),
       ),
